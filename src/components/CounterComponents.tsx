@@ -34,6 +34,7 @@ export default function CounterComponents({
     startTransition(() =>
       optimisticCounter({ type: "sync", value: count.value })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count.value]);
 
   const handleIncrement = async () => {

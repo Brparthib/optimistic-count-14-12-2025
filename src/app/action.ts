@@ -1,6 +1,7 @@
 "use server"
 
 import { Counter, getCounter, incrementCounter } from "@/store/counterStore";
+import { revalidatePath } from "next/cache";
 
 export type ResolveReject = {success: true; counter: Counter} 
 | {success: false; error: string; counter: Counter}
@@ -18,6 +19,8 @@ export async function incrementFromServer(): Promise<ResolveReject> {
 
     // counter increments when success
     const newCounter = incrementCounter();
+
+    revalidatePath("/");
 
     return {success: true, counter: newCounter}
 }
